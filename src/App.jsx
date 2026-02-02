@@ -44,9 +44,44 @@ export function App() {
     return total;
   }
 
+  function addItem(guitar) {
+    const itemIndex = cart.findIndex((item) => item.id === guitar.id);
+    if (itemIndex === -1) return;
+    const updatedCart = [...cart];
+    updatedCart[itemIndex].quantity++;
+    setCart(updatedCart);
+  }
+
+  function removeItem(guitar) {
+    const itemIndex = cart.findIndex((item) => item.id === guitar.id);
+    if (itemIndex === -1) return;
+    const updatedCart = [...cart];
+    updatedCart[itemIndex].quantity--;
+    if (updatedCart[itemIndex].quantity <= 0) {
+      setCart(updatedCart.filter((item) => item.id !== guitar.id));
+    } else {
+      setCart(updatedCart);
+    }
+  }
+
+  function removeFromCart(guitar) {
+    setCart(cart.filter((item) => item.id !== guitar.id));
+  }
+
+  function clearCart() {
+    setCart([]);
+  }
+
   return (
     <>
-      <Header cart={cart} total={calculateTotal()} />
+      <Header
+        cart={cart}
+        total={calculateTotal()}
+        addItem={addItem}
+        removeItem={removeItem}
+        removeFromCart={removeFromCart}
+        clearCart={clearCart}
+      />
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 

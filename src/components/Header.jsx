@@ -1,6 +1,6 @@
 import { Guitar } from "./Guitar";
 
-export function Header({cart, total}) {
+export function Header({ cart, total, addItem, removeItem, removeFromCart, clearCart }) {
     return (
     <header className="py-5 header">
         <div className="container-xl">
@@ -43,6 +43,7 @@ export function Header({cart, total}) {
                                             <button
                                                 type="button"
                                                 className="btn btn-dark"
+                                                onClick={() => removeItem(guitar)}
                                             >
                                                 -
                                             </button>
@@ -50,6 +51,7 @@ export function Header({cart, total}) {
                                             <button
                                                 type="button"
                                                 className="btn btn-dark"
+                                                onClick={() => addItem(guitar)}
                                             >
                                                 +
                                             </button>
@@ -58,6 +60,7 @@ export function Header({cart, total}) {
                                             <button
                                                 className="btn btn-danger"
                                                 type="button"
+                                                onClick={() => removeFromCart(guitar)}
                                             >
                                                 X
                                             </button>
@@ -67,7 +70,13 @@ export function Header({cart, total}) {
                                 </tbody>
                             </table>
                             <p className="text-end">Total pagar: <span className="fw-bold">${total}</span></p>
-                            <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                            <button
+                                className="btn btn-dark w-100 mt-3 p-2"
+                                type="button"
+                                onClick={clearCart}
+                            >
+                                Vaciar Carrito
+                            </button>
                         </div>
                     </div>
                 </nav>
